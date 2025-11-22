@@ -1,11 +1,14 @@
 import { toRadian } from "../utils";
 import { convertBasedOnAnchor } from "./anchor";
 
-export function sprite(name) {
+export function sprite(name, opt) {
+	const width = opt?.width ?? undefined;
+	const height = opt?.height ?? undefined;
+
 	return {
-		width: 64,
-		height: 64,
-		sprite: name,
+		width: width,
+		height: height,
+		sprite: { name, width, height },
 		loaded: false,
 		draw(ctx, e) {
 			if (!this.loaded) throw new Error("Sprite not loaded yet");
@@ -35,10 +38,10 @@ export function sprite(name) {
 				this.image,
 				0,
 				0,
-				this.image.width,
-				this.image.height,
-				-this.width / 2,
-				-this.height / 2,
+				e.image.width,
+				e.image.height,
+				anchored_pos.x - e.pos.x,
+				anchored_pos.y - e.pos.y,
 				this.width,
 				this.height
 			);

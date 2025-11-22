@@ -188,9 +188,12 @@ class Engine {
 			if ("sprite" in e) {
 				if (!e.loaded) {
 					e.loaded = true;
-					e.image = this.sprites[e.sprite];
-					e.width = e.image.width;
-					e.height = e.image.height;
+					e.image = this.sprites[e.sprite.name];
+					e.sprite.width = e.image.width;
+					e.sprite.height = e.image.height;
+
+					if (!e.width) e.width = e.image.width;
+					if (!e.height) e.height = e.image.height;
 				}
 
 				e.draw(this.canvas_ctx, e);

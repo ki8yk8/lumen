@@ -19,8 +19,6 @@ export function registerLevel1Scene({ k }) {
 			target: 2,
 			onComplete: () => k.go("level-2"),
 		});
-		
-		k.add([k.sprite("player"), k.pos(200, 200), k.anchor("center")]);
 
 		Mirror({ k, angle: 15, pos: vec2(600, 200) });
 
