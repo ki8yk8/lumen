@@ -13,7 +13,6 @@ const k = new Engine({
 });
 
 // level 1 with the simple scene
-const player = Player({ k });
 const laser_light = k.add([
 	k.rect(50, 25),
 	k.rotate(0),
@@ -27,6 +26,9 @@ const ray_source = Ray({
 	spawnrate: 0.2,
 	pos: vec2(laser_light.pos.x + laser_light.width / 2, laser_light.pos.y),
 });
-const target = Target({ k, pos: k.vec2(500, 500), target: 20 });
+const target = Target({ k, pos: k.vec2(500, 500), target: 2 });
 
 const mirror = Mirror({ k, angle: 15, pos: vec2(600, 200) });
+
+// player should be at the top
+const player = Player({ k });

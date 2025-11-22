@@ -18,6 +18,7 @@ export default function Target({ k, pos = [100, 100], target = 20 }) {
 		k.rect(30, 30, { radius: 15 }),
 		k.pos(green_circle.pos),
 		k.color("GREEN"),
+		k.area(),
 	]);
 
 	white_circle.onCollide("ray", (ray) => {
@@ -28,8 +29,14 @@ export default function Target({ k, pos = [100, 100], target = 20 }) {
 			green_circle.color = k.color("RED").color;
 		}
 
-		if (filler / target > 1.0) {
+		if (filler / target >= 1.0) {
 			inner_circle.color = k.color("RED").color;
 		}
+	});
+
+	inner_circle.onCollide("player", () => {
+		if (filler < 1.0) return;
+
+		console.log("Game complete");
 	});
 }
