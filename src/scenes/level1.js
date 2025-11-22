@@ -1,8 +1,8 @@
-import { vec2 } from "./engine/vec2";
-import Mirror from "./objects/mirror";
-import Player from "./objects/player";
-import Ray from "./objects/ray";
-import Target from "./objects/target";
+import { vec2 } from "../engine/vec2";
+import Mirror from "../objects/mirror";
+import Player from "../objects/player";
+import Ray from "../objects/ray";
+import Target from "../objects/target";
 
 export function registerLevel1Scene({ k }) {
 	k.scene("level-1", () => {
