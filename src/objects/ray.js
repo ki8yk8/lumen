@@ -22,7 +22,7 @@ export default function Ray({
 
 	function spawnPhoton() {
 		const ray = k.add([
-			k.rect(10, 10, {
+			k.rect(10, 5, {
 				radius: 5,
 			}),
 			k.pos(pos.add(laser_light.width / 2, 0)),

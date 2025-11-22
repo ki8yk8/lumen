@@ -4,6 +4,7 @@ import { pos } from "./components/pos";
 import { rect } from "./components/rect";
 import { rotate } from "./components/rotate";
 import { scale } from "./components/scale";
+import { sprite } from "./components/sprite";
 import { tag } from "./components/tags";
 import { text } from "./components/text";
 import { color, hexToRgb, rgbToHex, toDegree, toRadian } from "./utils";
@@ -41,6 +42,7 @@ class Engine {
 
 		this.entities = [];
 		this.scenes = {};
+		this.sprites = {};
 		this.on_update_functions = [];
 		this.all_tweens = [];
 		this.time = 0;
@@ -90,6 +92,7 @@ class Engine {
 		this.anchor = anchor;
 		this.pos = pos;
 		this.rect = rect;
+		this.sprite = sprite;
 		this.rotate = rotate;
 		this.scale = scale;
 		this.tag = tag;
@@ -182,6 +185,16 @@ class Engine {
 		this.canvas_ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
 		for (const e of this.entities) {
+			if ("sprite" in e) {
+				if (!e.loaded) {
+					e.loaded = true;
+					e.image = this.sprites[e.sprite];
+					e.width = e.image.width;
+					e.height = e.image.height;
+				}
+
+				e.draw(this.canvas_ctx, e);
+			}
 			if (e.draw) e.draw(this.canvas_ctx, e);
 		}
 	}
@@ -392,6 +405,16 @@ class Engine {
 
 		// call the scene callback
 		this.scenes[name]();
+	}
+
+	loadSprite(name, src) {
+		if (name in this.sprites)
+			throw new Error(`Sprites with name ${name} already exists`);
+
+		const image = new Image();
+		image.src = src;
+
+		this.sprites[name] = image;
 	}
 
 	wait(seconds, callback) {

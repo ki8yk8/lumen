@@ -8,6 +8,8 @@ const k = new Engine({
 	backgroundColor: COLORS.BLACK,
 });
 
+k.loadSprite("player", "/sprites/player.png");
+
 registerLevel1Scene({ k });
 
 k.go("level-1");

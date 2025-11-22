@@ -22,13 +22,13 @@ export default function Player({
 		k.rotate(0),
 		k.anchor("center"),
 	]);
-	k.add([
+	const left_hand = k.add([
 		k.rect(40, 10, { radius: [40, 40, 0, 0] }),
 		k.pos(player.pos.sub(0, player.height / 2)),
 		k.color("PURPLE"),
 		k.anchor("center"),
 	]);
-	k.add([
+	const right_hand = k.add([
 		k.rect(40, 10, { radius: [0, 0, 40, 40] }),
 		k.pos(player.pos.add(0, player.height / 2)),
 		k.color("PURPLE"),
@@ -47,6 +47,8 @@ export default function Player({
 	k.onKeyDown(" ", () => {
 		player.moveBy(k.vec2(player_speed * k.dt, 0).rotate(player.angle));
 		player_head.moveBy(k.vec2(player_speed * k.dt, 0).rotate(player.angle));
+		left_hand.moveBy(k.vec2(player_speed * k.dt, 0).rotate(player.angle));
+
 		player.is_rotating = false;
 	});
 
