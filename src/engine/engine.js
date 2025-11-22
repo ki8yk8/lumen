@@ -194,7 +194,13 @@ class Engine {
 		}
 
 		for (const c of components) {
-			Object.assign(entity, c);
+			if (typeof c === "string") {
+				Object.assign(entity, this.tag(c));
+			} else if (Array.isArray(c) && c.every((i) => typeof i === "string")) {
+				Object.assign(entity, this.tag(c));
+			} else {
+				Object.assign(entity, c);
+			}
 		}
 
 		this.entities.push(entity);
@@ -320,11 +326,11 @@ class Engine {
 	}
 
 	wait(seconds, callback) {
-		setTimeout(callback, seconds*1000);
+		setTimeout(callback, seconds * 1000);
 	}
 
 	loop(seconds, callback) {
-		setInterval(callback, seconds*1000);
+		setInterval(callback, seconds * 1000);
 	}
 }
 

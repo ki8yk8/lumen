@@ -1,4 +1,5 @@
 import Engine, { COLORS } from "./engine";
+import Ray from "./objects/ray";
 
 const k = new Engine({
 	width: window.innerWidth,
@@ -7,9 +8,4 @@ const k = new Engine({
 	backgroundColor: COLORS.BLACK,
 });
 
-const boundary_wall = k.add([
-	k.rect(200, 10),
-	k.color("RED"),
-	k.pos(100, 100),
-	k.anchor("center"),
-]);
+const ray = Ray({ k });
