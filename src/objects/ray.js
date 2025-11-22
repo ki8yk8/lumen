@@ -9,10 +9,15 @@ export default function Ray({
 	c,
 }) {
 	const laser_light = k.add([
-		k.rect(50, 25),
+		k.rect(70, 25, { radius: 6 }),
 		k.rotate(0),
 		k.pos(pos),
-		k.color(255, 0, 255),
+		k.color("#BEC8B9"),
+	]);
+	k.add([
+		k.rect(25, 15, { radius: [0, 0, 5, 5] }),
+		k.pos(laser_light.pos.sub(0, 5)),
+		k.color("RED"),
 	]);
 
 	function spawnPhoton() {
