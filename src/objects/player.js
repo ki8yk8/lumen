@@ -8,6 +8,7 @@ export default function Player({ k, rotation_speed = 90, player_speed = 300 }) {
 		{
 			is_rotating: true,
 		},
+		"player",
 	]);
 
 	const player_head = k.add([

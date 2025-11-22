@@ -20,9 +20,6 @@ const laser_light = k.add([
 	k.pos(100, 200),
 	k.color(255, 0, 255),
 ]);
-const mirror = Mirror({ k, angle: 50, pos: vec2(600, 200) });
-const target = Target({ k, pos: k.vec2(500, 500) });
-
 const ray_source = Ray({
 	k,
 	angle: 0,
@@ -30,3 +27,6 @@ const ray_source = Ray({
 	spawnrate: 0.2,
 	pos: vec2(laser_light.pos.x + laser_light.width / 2, laser_light.pos.y),
 });
+const target = Target({ k, pos: k.vec2(500, 500), target: 20 });
+
+const mirror = Mirror({ k, angle: 15, pos: vec2(600, 200) });

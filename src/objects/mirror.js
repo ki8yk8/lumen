@@ -1,4 +1,4 @@
-export default function Mirror({k, pos, angle}) {
+export default function Mirror({ k, pos, angle, rotation_speed = 90 }) {
 	const mirror = k.add([
 		k.rect(100, 10),
 		k.pos(pos),
@@ -9,5 +9,15 @@ export default function Mirror({k, pos, angle}) {
 		"mirror",
 	]);
 
-	return mirror
+	k.onKeyPressed("ArrowUp", () => {
+		if (mirror.checkCollision("player")) {
+			mirror.angle += rotation_speed * k.dt;
+		}
+	});
+	k.onKeyPressed("ArrowDown", () => {
+		if (mirror.checkCollision("player")) {
+			mirror.angle -= rotation_speed * k.dt;
+		}
+	});
+	return mirror;
 }
