@@ -8,11 +8,4 @@ const k = new Engine({
 	backgroundColor: COLORS.BLACK,
 });
 
-const ray = Ray({ k });
-console.log(ray.tags);
-console.log(ray.is("ray"));
-ray.tag("newtag");
-console.log(ray.tags);
-console.log(ray.is("newtag"));
-ray.untag("newtag");
-console.log(ray.tags);
+const ray = Ray({ k, rotate: 45, speed: 100, spawnrate: 0.2 });

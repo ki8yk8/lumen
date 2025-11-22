@@ -330,6 +330,7 @@ class Engine {
 	}
 
 	loop(seconds, callback) {
+		callback();
 		setInterval(callback, seconds * 1000);
 	}
 }
