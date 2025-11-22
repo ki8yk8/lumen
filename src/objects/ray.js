@@ -31,6 +31,18 @@ export default function Ray({
 			const vel = k.vec2(speed, 0).rotate(angle);
 			ray.vel = vel;
 		});
+
+		k.onUpdate(() => {
+			// if ray is outside then delete it
+			if (
+				ray.pos.x > k.width() + 100 ||
+				ray.pos.y > k.height() + 100 ||
+				ray.pos.x < -100 ||
+				ray.pos.y < -100
+			) {
+				k.destroy(ray);
+			}
+		});
 	}
 
 	k.loop(spawnrate, spawnPhoton);
