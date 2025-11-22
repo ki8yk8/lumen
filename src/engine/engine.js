@@ -20,8 +20,8 @@ class Engine {
 			canvas: undefined,
 		}
 	) {
-		this.canvasWidth = props.width;
-		this.canvasHeight = props.height;
+		this.canvasWidth = props.width * window.devicePixelRatio;
+		this.canvasHeight = props.height * window.devicePixelRatio;
 		this.backgroundColor = props.backgroundColor;
 
 		this.canvas = props.canvas || document.createElement("canvas");
@@ -40,6 +40,7 @@ class Engine {
 		this.canvas.height = this.canvasHeight;
 
 		this.entities = [];
+		this.scenes = {};
 		this.on_update_functions = [];
 		this.all_tweens = [];
 		this.time = 0;
@@ -222,6 +223,12 @@ class Engine {
 			this.rotate(0),
 			this.scale(1, 1),
 			this.tag(),
+			{
+				_exist: true,
+				exists() {
+					return this._exist;
+				},
+			},
 		];
 	}
 
@@ -365,6 +372,26 @@ class Engine {
 		if (index !== -1) {
 			this.entities.splice(index, 1);
 		}
+	}
+
+	scene(name, callback) {
+		this.scenes[name] = callback;
+	}
+	go(name) {
+		if (!(name in this.scenes)) {
+			throw new Error(`Could not find the scene, got ${name}`);
+		}
+		// clear the scene
+		this.entities = [];
+		this.on_update_functions = [];
+		this.all_tweens = [];
+		this.time = 0;
+		this.keydown_callbacks = [];
+		this.keypress_callbacks = [];
+		this.keyrelease_callbacks = [];
+
+		// call the scene callback
+		this.scenes[name]();
 	}
 
 	wait(seconds, callback) {

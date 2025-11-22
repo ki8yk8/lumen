@@ -1,4 +1,9 @@
-export default function Target({ k, pos = [100, 100], target = 20 }) {
+export default function Target({
+	k,
+	pos = [100, 100],
+	target = 20,
+	onComplete,
+}) {
 	let filler = 0;
 	const green_circle = k.add([
 		k.rect(100, 100, { radius: 50 }),
@@ -36,7 +41,6 @@ export default function Target({ k, pos = [100, 100], target = 20 }) {
 
 	inner_circle.onCollide("player", () => {
 		if (filler < 1.0) return;
-
-		console.log("Game complete");
+		onComplete?.();
 	});
 }
