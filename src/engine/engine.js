@@ -295,30 +295,66 @@ class Engine {
 	isOverlapping(e1, e2) {
 		// implements AABB Collision
 		// referece: https://dev.to/pratyush_mohanty_6b8f2749/the-math-behind-bounding-box-collision-detection-aabb-vs-obbseparate-axis-theorem-1gdn
-		const e1_pos = convertBasedOnAnchor(
-			e1.pos.x,
-			e1.pos.y,
-			e1.width,
-			e1.height,
-			e1.anchor
-		);
-		const e2_pos = convertBasedOnAnchor(
-			e2.pos.x,
-			e2.pos.y,
-			e2.width,
-			e2.height,
-			e2.anchor
-		);
+		function getCenter(e) {
+			const tl = convertBasedOnAnchor(
+				e.pos.x,
+				e.pos.y,
+				e.width,
+				e.height,
+				e.anchor
+			);
 
-		const { x: e1_x1, y: e1_y1 } = e1_pos;
-		const e1_x2 = e1_x1 + e1.width;
-		const e1_y2 = e1_y1 + e1.height;
+			return vec2(tl).add(e.width / 2, e.height / 2);
+		}
 
-		const { x: e2_x1, y: e2_y1 } = e2_pos;
-		const e2_x2 = e2_x1 + e2.width;
-		const e2_y2 = e2_y1 + e2.height;
+		function getCorners(e) {
+			const center = getCenter(e);
 
-		return e1_x1 < e2_x2 && e1_x2 > e2_x1 && e1_y1 < e2_y2 && e1_y2 > e2_y1;
+			const local_corners = [
+				vec2(-e.width / 2, -e.height / 2),
+				vec2(e.width / 2, -e.height / 2),
+				vec2(e.width / 2, e.height / 2),
+				vec2(-e.width / 2, e.height / 2),
+			];
+
+			return local_corners.map((p) => p.rotate(e.angle).add(center));
+		}
+
+		function project(points, axis) {
+			let min = points[0].dot(axis);
+			let max = min;
+
+			points.forEach((item, index) => {
+				if (index === 0) return;
+
+				const v = item.dot(axis);
+				if (v < min) min = v;
+				if (v > max) max = v;
+			});
+
+			return { min, max };
+		}
+
+		function overlap(a, b) {
+			return a.min <= b.max && b.min <= a.max;
+		}
+
+		function get_axes(c) {
+			return [c[1].sub(c[0]).unit(), c[3].sub(c[0]).unit()];
+		}
+
+		const [c1, c2] = [getCorners(e1), getCorners(e2)];
+		const axes = [...get_axes(c1), ...get_axes(c2)];
+
+		for (const axis of axes) {
+			const [p1, p2] = [project(c1, axis), project(c2, axis)];
+
+			if (!overlap(p1, p2)) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 	destroy(e) {
