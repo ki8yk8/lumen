@@ -1,5 +1,6 @@
 export function area() {
 	return {
+		_exist: true,
 		_collisions: [],
 		_collision_events: {
 			onEnter: [],
@@ -74,6 +75,9 @@ export function area() {
 				);
 			}
 			this._collision_events.onExit.push({ tag, callback });
+		},
+		exists() {
+			return this._exist;
 		},
 	};
 }

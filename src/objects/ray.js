@@ -40,7 +40,7 @@ export default function Ray({
 				ray.pos.x < -100 ||
 				ray.pos.y < -100
 			) {
-				k.destroy(ray);
+				ray.exists() && k.destroy(ray);
 			}
 		});
 	}

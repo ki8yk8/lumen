@@ -358,7 +358,13 @@ class Engine {
 	}
 
 	destroy(e) {
-		this.entities.splice(this.entities.indexOf(e), 1);
+		if (!e.exists()) return;
+		e._exists = false;
+
+		const index = this.entities.indexOf(e);
+		if (index !== -1) {
+			this.entities.splice(index, 1);
+		}
 	}
 
 	wait(seconds, callback) {
