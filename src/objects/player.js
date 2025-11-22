@@ -1,7 +1,12 @@
-export default function Player({ k, rotation_speed = 90, player_speed = 300 }) {
+export default function Player({
+	k,
+	pos = [100, 100],
+	rotation_speed = 90,
+	player_speed = 300,
+}) {
 	const player = k.add([
 		k.rect(80, 80, { radius: 40 }),
-		k.pos(100, 100),
+		k.pos(pos),
 		k.rotate(0),
 		k.color("ORANGE"),
 		k.area(),
