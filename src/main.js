@@ -9,3 +9,10 @@ const k = new Engine({
 });
 
 const ray = Ray({ k });
+console.log(ray.tags);
+console.log(ray.is("ray"));
+ray.tag("newtag");
+console.log(ray.tags);
+console.log(ray.is("newtag"));
+ray.untag("newtag");
+console.log(ray.tags);

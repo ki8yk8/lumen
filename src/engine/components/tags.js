@@ -1,25 +1,33 @@
 export function tag(tags = []) {
 	if (typeof tags === "string") {
-		tags = [tags];
+		tags = new Set([tags]);
+	} else {
+		tags = new Set(tags);
 	}
 
 	return {
 		tags,
+		tag(tag) {
+			this.tags.add(tag);
+		},
 		untag(tag) {
-			const tag_index = this.tags.indexOf(tag);
-			if (tag_index === -1) {
+			if (tag === "*") {
+				this.tags.clear();
+				return;
+			}
+			if (!this.tags.has(tag)) {
 				throw new Error(
 					`Cannot remove tag '${tag}' that doesn't exists in tag list, ${this.tags}`
 				);
 			}
 
 			// remove the tag
-			this.tags.splice(tag_index, 1);
+			this.tags.delete(tag);
 		},
 		is(tag) {
 			if (tag === "*") return true;
-			
-			return this.tags.includes(tag);
+
+			return this.tags.has(tag);
 		},
 	};
 }
