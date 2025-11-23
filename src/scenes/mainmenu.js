@@ -56,8 +56,15 @@ export default function registerMainMenuScene({ k }) {
 			renderItem(menu_items_objs, index, true);
 		});
 
+		k.onKeyPressed("Enter", () => {
+			if (menu_items[index] === "Start Game") {
+				k.go("level-1");
+			} else if (menu_items[index] === "Instructions") {
+				k.go("instructions");
+			}
+		});
+
 		function renderItem(objects, index, active = true) {
-			console.log(index);
 			const [item_bg, item_text] = objects[index];
 
 			item_bg.scale = active ? k.vec2(1.1) : k.vec2(1.0);
