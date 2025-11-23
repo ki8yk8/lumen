@@ -22,6 +22,21 @@ export function registerLevel1Scene({ k }) {
 			onHit: () => (helper.target_achieved = true),
 		});
 
+		const timer = k.add([
+			k.text("Time: 1:00"),
+			k.pos(k.width() - 60, 60),
+			k.anchor("topright"),
+			k.color("SKYBLUE"),
+			k.timer(60, handleTimeOver, handleTimeChange),
+		]);
+
+		timer.start();
+		function handleTimeOver() {}
+		function handleTimeChange(time) {
+			timer.text = `Time: ${Math.floor(time / 60)}:${time % 60}`;
+			timer.loaded = false;
+		}
+
 		Mirror({ k, angle: 15, pos: vec2(600, 150) });
 
 		// player should be at the top

@@ -7,6 +7,7 @@ import { scale } from "./components/scale";
 import { sprite } from "./components/sprite";
 import { tag } from "./components/tags";
 import { text } from "./components/text";
+import { timer } from "./components/timer";
 import { color, hexToRgb, rgbToHex, toDegree, toRadian } from "./utils";
 import { clamp, map, max, min } from "./utils/numbers";
 import { Random } from "./utils/random";
@@ -101,6 +102,7 @@ class Engine {
 		this.scale = scale;
 		this.tag = tag;
 		this.area = area;
+		this.timer = timer;
 		this.text = text;
 
 		// random utilities
