@@ -11,10 +11,11 @@ export default function registerInstructionsScene({ k }) {
 				"The player rotates constantly, you can move the player where his head is pointing by pressing 'space' key. You can rotate the mirrors by pressing arrow up and down while colliding with them. Your goal is to rotate all the mirrors such that the ray hits the target.",
 				{
 					size: 24,
-					maxWidth: 600,
+					maxWidth: 500,
+					lineHeight: 36,
 				}
 			),
-			k.pos(k.width() / 2, 180),
+			k.pos(k.width() / 2, 300),
 			k.color("WHITE"),
 		]);
 

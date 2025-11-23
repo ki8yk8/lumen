@@ -3,17 +3,24 @@ import { convertBasedOnAnchor } from "./anchor";
 
 export function text(
 	text,
-	opts = { size: 24, maxWidth: Infinity, font: "Monospace" }
+	opts = {
+		size: 24,
+		maxWidth: Infinity,
+		font: "Monospace",
+		lineHeight: undefined,
+	}
 ) {
 	const size = opts?.size ?? 24;
 	const font = opts?.font ?? "Monospace";
 	const maxWidth = opts.maxWidth ?? Infinity;
+	const lineHeight = opts.lineHeight ?? undefined;
 
 	return {
 		width: 0,
 		height: size,
 		text,
 		textSize: size,
+		lineHeight,
 		font,
 		maxWidth,
 		draw(ctx, e) {
@@ -27,13 +34,13 @@ export function text(
 			const widths = [];
 
 			for (let i = 0; i < words.length; i++) {
-				const test_line = line === "" ? words[i] : `${line}${words[i]} `;
+				const test_line = line === "" ? `${words[i]} ` : `${line}${words[i]} `;
 				const test_width = ctx.measureText(test_line).width;
 
 				if (test_width > e.maxWidth && line !== "") {
 					lines.push(line);
 					widths.push(ctx.measureText(line).width);
-					line = words[i];
+					line = `${words[i]} `;
 				} else {
 					line = test_line;
 				}
@@ -45,11 +52,12 @@ export function text(
 			}
 
 			const block_width = widths.length ? Math.max(...widths) : 0;
-			const line_height = e.textSize * 1.2;
+			const line_height = e.lineHeight ?? e.textSize * 1.2;
 			const block_height = line_height * lines.length;
 
 			e.width = block_width;
 			e.height = block_height;
+			e.lineHeight = line_height;
 
 			const anchored_pos = convertBasedOnAnchor(
 				e.pos.x,
