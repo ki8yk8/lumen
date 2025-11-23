@@ -54,6 +54,9 @@ class Engine {
 		this.keydown_callbacks = [];
 		this.keyrelease_callbacks = [];
 
+		this.loops = [];
+		this.waits = [];
+
 		// window event listeners to handle the keys action
 		window.addEventListener("keydown", (e) => {
 			e.preventDefault();
@@ -419,6 +422,13 @@ class Engine {
 		this.keypress_callbacks = [];
 		this.keyrelease_callbacks = [];
 
+		// clear all the loops and waits
+		this.loops.forEach((loop) => clearInterval(loop));
+		this.waits.forEach((wait) => clearTimeout(wait));
+
+		this.loops = [];
+		this.waits = [];
+
 		// call the scene callback
 		this.scenes[name]();
 	}
@@ -434,12 +444,14 @@ class Engine {
 	}
 
 	wait(seconds, callback) {
-		setTimeout(callback, seconds * 1000);
+		const timeout = setTimeout(callback, seconds * 1000);
+		this.waits.push(timeout);
 	}
 
 	loop(seconds, callback) {
 		callback();
-		setInterval(callback, seconds * 1000);
+		const interval = setInterval(callback, seconds * 1000);
+		this.loops.push(interval);
 	}
 }
 
