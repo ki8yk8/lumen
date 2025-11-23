@@ -33,6 +33,7 @@ export default function Helper({ k }) {
 		if (moved >= 3 && message_box.target_achieved) {
 			message_1.text =
 				"Once, the target turns red collide with it to proceed to the next level.";
+			message_1.loaded = false;
 		}
 	});
 

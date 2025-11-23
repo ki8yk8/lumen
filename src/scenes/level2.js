@@ -28,6 +28,10 @@ export function registerLevel2Scene({ k }) {
 		Obstacle({k, width: 50, pos: k.vec2(500+75, 400+20), angle: 90});
 
 		// player should be at the top
-		Player({ k, pos: vec2(100, 100) });
+		const player = Player({ k, pos: vec2(90, 90) });
+
+		k.onUpdate(() => {
+			// console.log(player.pos);
+		})
 	});
 }

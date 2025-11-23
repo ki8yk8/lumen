@@ -46,6 +46,7 @@ class Engine {
 		this.on_update_functions = [];
 		this.all_tweens = [];
 		this.time = 0;
+		this.dt = 0;
 
 		// keypresses
 		this.keys_down = new Set(); // all the keys currently down
@@ -417,7 +418,8 @@ class Engine {
 		this.entities = [];
 		this.on_update_functions = [];
 		this.all_tweens = [];
-		this.time = 0;
+		this.time = performance.now() / 1000;
+		this.dt = 0;
 		this.keydown_callbacks = [];
 		this.keypress_callbacks = [];
 		this.keyrelease_callbacks = [];

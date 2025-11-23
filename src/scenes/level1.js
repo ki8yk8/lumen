@@ -22,7 +22,7 @@ export function registerLevel1Scene({ k }) {
 			onHit: () => (helper.target_achieved = true),
 		});
 
-		Mirror({ k, angle: 15, pos: vec2(600, 150) });
+		Mirror({ k, angle: 60, pos: vec2(600, 150) });
 
 		// player should be at the top
 		Player({ k, pos: vec2(100, 100) });
