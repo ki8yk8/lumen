@@ -8,18 +8,20 @@ export function text(
 		maxWidth: Infinity,
 		font: "Monospace",
 		lineHeight: undefined,
+		align: "left",
 	}
 ) {
 	const size = opts?.size ?? 24;
 	const font = opts?.font ?? "Monospace";
 	const maxWidth = opts.maxWidth ?? Infinity;
 	const lineHeight = opts.lineHeight ?? undefined;
+	const align = opts.align ?? "left";
 
 	return {
 		width: 0,
 		height: size,
 		text,
-		textOpts: { textSize: size, lineHeight, font, lines: [] },
+		textOpts: { textSize: size, lineHeight, font, lines: [], align },
 		maxWidth,
 		loaded: false,
 		draw(ctx, e) {
@@ -63,6 +65,29 @@ export function text(
 				e.textOpts.lines = lines;
 			}
 
+			let align_offset = 0;
+			switch (e.textOpts.align) {
+				case "center":
+					align_offset = e.width / 2;
+					ctx.textAlign = "center";
+					break;
+
+				case "right":
+					align_offset = e.width;
+					ctx.textAlign = "center";
+					break;
+
+				case "left":
+					align_offset = 0;
+					ctx.textAlign = "left";
+					break;
+
+				default:
+					throw new Error(
+						`Align can be one of left | right | center, got ${e.textOpts.align}`
+					);
+			}
+			
 			const anchored_pos = convertBasedOnAnchor(
 				e.pos.x,
 				e.pos.y,
@@ -85,7 +110,7 @@ export function text(
 			for (let i = 0; i < e.textOpts.lines.length; i++) {
 				ctx.fillText(
 					e.textOpts.lines[i].trimEnd(),
-					anchored_pos.x - e.pos.x,
+					anchored_pos.x - e.pos.x + align_offset,
 					anchored_pos.y - e.pos.y + i * e.textOpts.lineHeight
 				);
 			}

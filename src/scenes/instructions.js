@@ -13,6 +13,7 @@ export default function registerInstructionsScene({ k }) {
 					size: 24,
 					maxWidth: 500,
 					lineHeight: 36,
+					align: "center",
 				}
 			),
 			k.pos(k.width() / 2, 300),
