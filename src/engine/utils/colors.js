@@ -6,6 +6,7 @@ export const COLORS = {
 	ORANGE: "#ff9f1c",
 	PURPLE: "#7765e3",
 	GREEN: "#20bf55",
+	BROWN: "#705D56",
 };
 
 export function rgbToHex(...props) {
