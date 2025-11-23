@@ -1,6 +1,7 @@
 import Engine, { COLORS } from "./engine";
 import { registerLevel1Scene } from "./scenes/level1";
 import { registerLevel2Scene } from "./scenes/level2";
+import { registerLevel3Scene } from "./scenes/level3";
 
 const k = new Engine({
 	width: window.innerWidth,
@@ -13,5 +14,6 @@ k.loadSprite("player", "/sprites/player.png");
 
 registerLevel1Scene({ k });
 registerLevel2Scene({ k });
+registerLevel3Scene({ k });
 
-k.go("level-2");
+k.go("level-3");
