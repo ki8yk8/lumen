@@ -32,11 +32,11 @@ export function registerLevel4Scene({ k }) {
 		Obstacle({ k, width: 100, pos: k.vec2(420, 330 + 95), angle: 90 });
 
 		const timer = k.add([
-			k.text("Time: 1:00"),
+			k.text("Time: 6:00"),
 			k.pos(k.width() - 60, 60),
 			k.anchor("topright"),
 			k.color("SKYBLUE"),
-			k.timer(40, handleTimeOver, handleTimeChange),
+			k.timer(360, handleTimeOver, handleTimeChange),
 		]);
 
 		timer.start();

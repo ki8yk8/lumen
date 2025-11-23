@@ -23,11 +23,11 @@ export function registerLevel1Scene({ k }) {
 		});
 
 		const timer = k.add([
-			k.text("Time: 1:00"),
+			k.text("Time: 1:10"),
 			k.pos(k.width() - 60, 60),
 			k.anchor("topright"),
 			k.color("SKYBLUE"),
-			k.timer(40, handleTimeOver, handleTimeChange),
+			k.timer(70, handleTimeOver, handleTimeChange),
 		]);
 
 		timer.start();
