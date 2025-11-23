@@ -416,6 +416,13 @@ class Engine {
 		if (!(name in this.scenes)) {
 			throw new Error(`Could not find the scene, got ${name}`);
 		}
+
+		// before clearing the entities, find the timer and resets the timer
+		const timer_entites = this.entities.filter((item) => "time" in item);
+		timer_entites.forEach((timer) => {
+			window.clearInterval(timer.timer_opts.interval);
+		});
+
 		// clear the scene
 		this.entities = [];
 		this.on_update_functions = [];
