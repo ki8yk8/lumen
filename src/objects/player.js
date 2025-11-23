@@ -28,6 +28,11 @@ export default function Player({
 	k.onKeyDown(" ", () => {
 		player.moveBy(k.vec2(player_speed * k.dt, 0).rotate(player.angle));
 
+		// clamps the position of player inside the screen
+		const offset = Math.max(player.width, player.height) / 2;
+		player.pos.x = k.clamp(player.pos.x, offset, k.width() - offset);
+		player.pos.y = k.clamp(player.pos.y, offset, k.height() - offset);
+
 		player.is_rotating = false;
 	});
 
