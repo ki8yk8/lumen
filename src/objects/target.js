@@ -2,6 +2,7 @@ export default function Target({
 	k,
 	pos = [100, 100],
 	target = 20,
+	onHit,
 	onComplete,
 }) {
 	let filler = 0;
@@ -26,9 +27,11 @@ export default function Target({
 		k.area(),
 	]);
 
+	let hit = false;
 	white_circle.onCollide("ray", (ray) => {
 		k.destroy(ray);
 		filler++;
+		!hit && onHit?.();
 
 		if (filler / target > 0.5) {
 			green_circle.color = k.color("RED").color;

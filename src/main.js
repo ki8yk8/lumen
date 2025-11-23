@@ -22,4 +22,4 @@ registerLevel4Scene({ k });
 registerMainMenuScene({ k });
 registerInstructionsScene({ k });
 
-k.go("mainmenu");
+k.go("level-1");
