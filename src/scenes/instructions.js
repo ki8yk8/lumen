@@ -18,6 +18,7 @@ export default function registerInstructionsScene({ k }) {
 			),
 			k.pos(k.width() / 2, 300),
 			k.color("WHITE"),
+			k.anchor("center"),
 		]);
 
 		const hint = k.add([

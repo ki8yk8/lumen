@@ -3,8 +3,9 @@ import { vec2 } from "../engine/vec2";
 export default function registerMainMenuScene({ k }) {
 	k.scene("mainmenu", () => {
 		const logo = k.add([
-			k.text("Lumen", { size: 120 }),
-			k.pos(k.width() / 2, 100),
+			k.text("Lumen", { size: 120, align: "left" }),
+			k.anchor("center"),
+			k.pos(k.width() / 2, 150),
 			k.color("WHITE"),
 			k.rotate(0),
 			"logo",

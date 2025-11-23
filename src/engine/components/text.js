@@ -87,7 +87,7 @@ export function text(
 						`Align can be one of left | right | center, got ${e.textOpts.align}`
 					);
 			}
-			
+
 			const anchored_pos = convertBasedOnAnchor(
 				e.pos.x,
 				e.pos.y,
@@ -111,7 +111,10 @@ export function text(
 				ctx.fillText(
 					e.textOpts.lines[i].trimEnd(),
 					anchored_pos.x - e.pos.x + align_offset,
-					anchored_pos.y - e.pos.y + i * e.textOpts.lineHeight
+					anchored_pos.y -
+						e.pos.y +
+						i * e.textOpts.lineHeight +
+						e.textOpts.textSize * 0.8
 				);
 			}
 
