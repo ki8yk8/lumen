@@ -17,7 +17,7 @@ export function registerLevel2Scene({ k }) {
 		Target({
 			k,
 			pos: k.vec2(500, 500),
-			target: 2,
+			target: 10,
 			onComplete: () => k.go("level-3"),
 		});
 

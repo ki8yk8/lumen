@@ -17,12 +17,12 @@ export function registerLevel1Scene({ k }) {
 		Target({
 			k,
 			pos: k.vec2(400, 400),
-			target: 2,
+			target: 10,
 			onComplete: () => k.go("level-2"),
 			onHit: () => (helper.target_achieved = true),
 		});
 
-		Mirror({ k, angle: 60, pos: vec2(600, 150) });
+		Mirror({ k, angle: 15, pos: vec2(600, 150) });
 
 		// player should be at the top
 		Player({ k, pos: vec2(100, 100) });

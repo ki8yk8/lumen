@@ -17,8 +17,8 @@ export function registerLevel4Scene({ k }) {
 		Target({
 			k,
 			pos: k.vec2(500, 400),
-			target: 2,
-			onComplete: () => k.go("complete"),
+			target: 10,
+			onComplete: () => k.go("completeenge"),
 		});
 
 		Mirror({ k, angle: 15, pos: vec2(600, 200) });
