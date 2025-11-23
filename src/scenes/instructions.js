@@ -7,7 +7,7 @@ export default function registerInstructionsScene({ k }) {
 		]);
 
 		const paragraph = k.add([
-			k.text("This is instruction"),
+			k.text(""),
 			k.pos(k.width() / 2, instructions_text.pos.y + 100),
 		]);
 
