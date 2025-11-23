@@ -28,5 +28,8 @@ export default function registerInstructionsScene({ k }) {
 			k.scale(1),
 			k.rotate(0),
 		]);
+
+		k.animate(hint, "angle", [0, -2, 0, 2, 0], 2);
+		k.animate(hint, "scale", [k.vec2(1), k.vec2(1.1), k.vec2(1)], 1);
 	});
 }
