@@ -22,6 +22,8 @@ export class Vec2 {
 			return { x: props[0][0], y: props[0][1] };
 		} else if (props[0] instanceof Vec2) {
 			return { x: props[0].x, y: props[0].y };
+		} else if (props.length === 1 && typeof props[0] === "number") {
+			return { x: props[0], y: props[0] };
 		}
 
 		throw new Error("Props should be either x, y or [x, y] or {x: , y:}");

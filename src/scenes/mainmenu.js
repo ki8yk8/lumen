@@ -1,3 +1,5 @@
+import { vec2 } from "../engine/vec2";
+
 export default function registerMainMenuScene({ k }) {
 	k.scene("mainmenu", () => {
 		const logo = k.add([
@@ -8,6 +10,12 @@ export default function registerMainMenuScene({ k }) {
 			"logo",
 		]);
 
-		k.animate(logo, "angle", [0, -20, 0, 20, 0], 1);
+		k.animate(logo, "angle", [0, -5, 0, 5, 0], 1);
+		k.animate(
+			logo,
+			"scale",
+			[k.vec2(1), k.vec2(1.1), k.vec2(1), k.vec2(0.9), k.vec2(1)],
+			2
+		);
 	});
 }
