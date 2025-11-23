@@ -7,8 +7,13 @@ export default function registerInstructionsScene({ k }) {
 		]);
 
 		const paragraph = k.add([
-			k.text(""),
-			k.pos(k.width() / 2, instructions_text.pos.y + 100),
+			k.text(
+				"The player rotates constantly, you can move the player where his head is pointing by pressing 'space' key. You can rotate the mirrors by pressing arrow up and down while colliding with them. Your goal is to rotate all the mirrors such that the ray hits the target.",
+				{
+					maxWidth: 600,
+				}
+			),
+			k.pos(100, 100),
 		]);
 
 		const hint = k.add([

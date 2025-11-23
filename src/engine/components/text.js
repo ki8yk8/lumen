@@ -1,10 +1,13 @@
 import { rgbToHex, toRadian } from "../utils";
 import { convertBasedOnAnchor } from "./anchor";
 
-export function text(text, opts = { size: 24, font: "Monospace" }) {
+export function text(
+	text,
+	opts = { size: 24, maxWidth: Infinity, font: "Monospace" }
+) {
 	const size = opts?.size ?? 24;
 	const font = opts?.font ?? "Monospace";
-	const maxWidth = opts.maxWidth;
+	const maxWidth = opts.maxWidth ?? Infinity;
 
 	return {
 		width: 0,
@@ -38,13 +41,34 @@ export function text(text, opts = { size: 24, font: "Monospace" }) {
 			// handles the scaling
 			ctx.scale(e.scale.x, e.scale.y);
 
-			// 0.8 is baseline fix
+			// to handle the word wrap if maxWidth is given
+			const words = e.text.split(" ");
+			let line = "";
+			let line_number = 0;
+
+			for (let i = 0; i < words.length; i++) {
+				const test_line = `${line}${words[i]} `;
+				const metrics = ctx.measureText(test_line);
+				const test_width = metrics.width;
+
+				if (test_width > e.maxWidth && i > 0) {
+					ctx.fillStyle = rgbToHex(e.color);
+					ctx.fillText(
+						line,
+						anchored_pos.x - e.pos.x,
+						anchored_pos.y - e.pos.y + e.textSize * 0.8 * line_number
+					);
+					line = `${words[i]} `;
+					line_number++;
+				} else {
+					line = test_line;
+				}
+			}
 			ctx.fillStyle = rgbToHex(e.color);
 			ctx.fillText(
-				e.text,
+				line,
 				anchored_pos.x - e.pos.x,
-				anchored_pos.y - e.pos.y + e.textSize * 0.8,
-				this.maxWidth
+				anchored_pos.y - e.pos.y + e.textSize * 0.8 * line_number
 			);
 
 			// restores context from the stack
