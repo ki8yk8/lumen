@@ -27,11 +27,13 @@ export function registerLevel1Scene({ k }) {
 			k.pos(k.width() - 60, 60),
 			k.anchor("topright"),
 			k.color("SKYBLUE"),
-			k.timer(60, handleTimeOver, handleTimeChange),
+			k.timer(40, handleTimeOver, handleTimeChange),
 		]);
 
 		timer.start();
-		function handleTimeOver() {}
+		function handleTimeOver() {
+			k.go("mainmenu");
+		}
 		function handleTimeChange(time) {
 			timer.text = `Time: ${Math.floor(time / 60)}:${time % 60}`;
 			timer.loaded = false;

@@ -6,6 +6,8 @@ export function timer(time = 6, onComplete, onChange) {
 			const interval = window.setInterval(() => {
 				this.time--;
 				onChange?.(this.time);
+
+				if (this.time === 0) this.onComplete?.();
 			}, 1000);
 
 			this.timer_opts.interval = interval;
@@ -14,8 +16,6 @@ export function timer(time = 6, onComplete, onChange) {
 			this.time = this.timer_opts.start_time;
 			onChange?.(this.time);
 		},
-		onComplete() {
-			onComplete?.();
-		},
+		onComplete,
 	};
 }
