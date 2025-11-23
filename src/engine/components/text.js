@@ -1,8 +1,8 @@
 import { rgbToHex, toRadian } from "../utils";
 import { convertBasedOnAnchor } from "./anchor";
 
-export function text(text, opts = { size: 18, font: "Monospace" }) {
-	const size = opts?.size ?? 18;
+export function text(text, opts = { size: 24, font: "Monospace" }) {
+	const size = opts?.size ?? 24;
 	const font = opts?.font ?? "Monospace";
 	const maxWidth = opts.maxWidth;
 

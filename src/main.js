@@ -1,4 +1,5 @@
 import Engine, { COLORS } from "./engine";
+import registerInstructionsScene from "./scenes/instructions";
 import { registerLevel1Scene } from "./scenes/level1";
 import { registerLevel2Scene } from "./scenes/level2";
 import { registerLevel3Scene } from "./scenes/level3";
@@ -19,5 +20,6 @@ registerLevel2Scene({ k });
 registerLevel3Scene({ k });
 registerLevel4Scene({ k });
 registerMainMenuScene({ k });
+registerInstructionsScene({ k });
 
-k.go("mainmenu");
+k.go("instructions");
