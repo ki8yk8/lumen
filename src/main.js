@@ -3,6 +3,7 @@ import { registerLevel1Scene } from "./scenes/level1";
 import { registerLevel2Scene } from "./scenes/level2";
 import { registerLevel3Scene } from "./scenes/level3";
 import { registerLevel4Scene } from "./scenes/level4";
+import registerMainMenuScene from "./scenes/mainmenu";
 
 const k = new Engine({
 	width: window.innerWidth,
@@ -17,5 +18,6 @@ registerLevel1Scene({ k });
 registerLevel2Scene({ k });
 registerLevel3Scene({ k });
 registerLevel4Scene({ k });
+registerMainMenuScene({ k });
 
-k.go("level-4");
+k.go("mainmenu");

@@ -272,6 +272,19 @@ class Engine {
 		});
 	}
 
+	animate(obj, property, lists, duration = 1) {
+		const n = lists.length - 1;
+		const t = duration / n;
+
+		this.loop(duration, () => {
+			for (let i = 0; i < n; i++) {
+				this.wait(i * t, () =>
+					this.tween(lists[i], lists[i + 1], t, (v) => (obj[property] = v))
+				);
+			}
+		});
+	}
+
 	onKeyPressed(key, callback) {
 		this.keypress_callbacks.push({
 			key,
